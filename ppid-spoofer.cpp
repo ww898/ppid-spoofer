@@ -27,6 +27,8 @@ limitations under the License.
 #include <optional>
 #include <string>
 
+#include "version.hpp"
+
 namespace ww898 {
 template <class F>
 struct on_exit_scope
@@ -70,7 +72,7 @@ DWORD get_shell_pid()
     if (tid == 0)
         throw std::runtime_error(std::format("Can't get shell process identifier: {}", GetLastError()));
 
-    std::wcout << L"Use shell process identifier: " << pid << std::endl;
+    std::cout << "Use shell process identifier: " << pid << std::endl;
     return pid;
 }
 
@@ -136,6 +138,8 @@ int wmain()
 {
     try
     {
+        std::cout << "PPID Spoofer v" << VERSION_MAJOR << "." << VERSION_MINOR << "." << VERSION_BUILD << " Copyright (C) 2026 Mikhail Pilin" << std::endl;
+
         auto const cmd_env = ww898::get_environment_variable(L"PPID_SPOOFER_CMD");
         auto const ppid_env = ww898::get_environment_variable(L"PPID_SPOOFER_PPID");
 
